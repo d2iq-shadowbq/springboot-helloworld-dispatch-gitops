@@ -12,9 +12,15 @@ spec:
     metadata:
       labels:
         app: hello-world-dispatch
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/path: '/actuator/prometheus'
+        prometheus.io/port: '8080'
+        prometheus.io/scheme: 'http'
     spec:
       containers:
       - image: "$({ .imageName })"
         name: hello-world-dispatch
         ports:
         - containerPort: 8080
+          name: web
